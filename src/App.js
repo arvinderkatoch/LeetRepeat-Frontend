@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { apiClient, sessionManager, formatErrorMessage, ApiError } from "./api";
+import { apiClient, sessionManager, formatErrorMessage } from "./api";
 
 const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || "";
 
@@ -36,6 +36,7 @@ function App() {
   const [questionForm, setQuestionForm] = useState(initialQuestionForm);
   const [activeQuestions, setActiveQuestions] = useState([]);
   const [archivedQuestions, setArchivedQuestions] = useState([]);
+  const [, setPagination] = useState(null);
   const [minutesById, setMinutesById] = useState({});
   const [qualityById, setQualityById] = useState({});
   const [filters, setFilters] = useState({
@@ -48,7 +49,6 @@ function App() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [pagination, setPagination] = useState(null);
 
   const dueCount = useMemo(
     () => activeQuestions.filter((question) => question.is_due).length,
