@@ -36,19 +36,20 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-image: 
+  background-image:
     radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.03), transparent 40%),
     radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.02), transparent 35%);
   pointer-events: none;
   opacity: 0.5;
 }
 
-
 button,
 input,
 select {
   font: inherit;
 }
+
+/* ===== LAYOUT ===== */
 
 .app-shell {
   max-width: 1180px;
@@ -68,7 +69,7 @@ select {
 
 .topbar h1 {
   margin: 0;
-  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
   letter-spacing: 0;
   text-transform: none;
   color: var(--primary);
@@ -109,10 +110,6 @@ select {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   padding: 28px;
   transition: box-shadow 0.3s ease, background 0.3s ease;
-}
-
-.card:hover {
-  /* hover effect removed */
 }
 
 .full-width {
@@ -173,6 +170,8 @@ select:focus {
   transform: translateY(-1px);
 }
 
+/* ===== BUTTONS ===== */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -186,6 +185,7 @@ select:focus {
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease;
   position: relative;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .btn:hover {
@@ -246,6 +246,8 @@ select:focus {
   border: 1.5px solid var(--border);
 }
 
+/* ===== STATS ===== */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -260,11 +262,6 @@ select:focus {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   transition: box-shadow 0.3s ease;
 }
-
-.stats div:hover {
-  /* hover effect removed */
-}
-
 
 .stats span {
   display: block;
@@ -286,6 +283,8 @@ select:focus {
   background-clip: text;
 }
 
+/* ===== MISC ===== */
+
 .muted {
   color: var(--muted);
 }
@@ -299,6 +298,8 @@ select:focus {
   display: grid;
   gap: 16px;
 }
+
+/* ===== QUESTION CARD ===== */
 
 .question-card {
   background: var(--card);
@@ -315,19 +316,11 @@ select:focus {
   display: none;
 }
 
-.question-card:hover {
-  /* hover effect removed */
-}
-
-.question-card:hover::before {
-  opacity: 0;
-}
-
 .question-header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   position: relative;
   z-index: 1;
@@ -339,6 +332,7 @@ select:focus {
   font-weight: 700;
   max-width: min(75%, 100%);
   transition: color 0.2s ease, text-shadow 0.2s ease;
+  word-break: break-word;
 }
 
 .question-header a:hover {
@@ -359,6 +353,7 @@ select:focus {
   border: 1px solid var(--border);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .pill.easy {
@@ -379,19 +374,21 @@ select:focus {
   border-color: rgba(239, 68, 68, 0.2);
 }
 
+/* ===== EMPTY STATE ===== */
+
 .empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 120px 20px 100px;
+  padding: 80px 20px 80px;
   text-align: center;
 }
 
 .empty-state-character {
-  width: 280px;
-  height: 280px;
-  margin-bottom: 48px;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 40px;
   perspective: 1200px;
   filter: drop-shadow(0 20px 40px rgba(124, 58, 237, 0.12));
   animation: float 4s ease-in-out infinite;
@@ -403,8 +400,8 @@ select:focus {
 }
 
 .empty-state h3 {
-  margin: 0 0 20px;
-  font-size: 1.8rem;
+  margin: 0 0 16px;
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
   background: linear-gradient(135deg, var(--primary), var(--primary-hover));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -414,7 +411,7 @@ select:focus {
 
 .empty-state p {
   color: var(--muted);
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1.8;
   max-width: 420px;
   font-weight: 500;
@@ -423,7 +420,10 @@ select:focus {
 .question-card p {
   margin: 12px 0 0;
   line-height: 1.55;
+  word-break: break-word;
 }
+
+/* ===== ACTIONS ROW ===== */
 
 .actions {
   display: grid;
@@ -437,54 +437,12 @@ select:focus {
 }
 
 .actions button {
-  min-width: 140px;
-}
-
-@media (max-width: 960px) {
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    grid-column: 1 / -1;
-  }
-
-  .filters-row,
-  .actions {
-    grid-template-columns: 1fr;
-  }
-}
-
-.actions {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.actions input {
   min-width: 0;
+  width: 100%;
 }
 
-.actions button {
-  min-width: 140px;
-}
+/* ===== FAB ===== */
 
-@media (max-width: 900px) {
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
-  .filters-row {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Floating Action Button */
 .fab-button {
   position: fixed;
   bottom: 32px;
@@ -508,7 +466,6 @@ select:focus {
 
 .fab-button:hover {
   transform: scale(1.12) translateY(-4px);
-  box-shadow: var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.3);
   filter: brightness(1.2);
 }
 
@@ -516,17 +473,15 @@ select:focus {
   transform: scale(0.95);
 }
 
-/* Form Card (Add Prompt) */
+/* ===== ADD CARD ===== */
+
 .add-card {
   grid-column: span 6;
-  
   backdrop-filter: blur(30px);
   border: 2px dashed var(--border);
   border-radius: 28px;
   transition: all 0.3s ease;
 }
-
-
 
 .add-card h2 {
   background: linear-gradient(135deg, var(--primary), var(--accent-light));
@@ -535,7 +490,215 @@ select:focus {
   background-clip: text;
 }
 
+/* ================================================
+   RESPONSIVE BREAKPOINTS
+   ================================================ */
+
+/* Tablet landscape → 2-column grids start collapsing */
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .card {
+    grid-column: span 6;
+  }
+
+  .add-card {
+    grid-column: span 6;
+  }
+
+  .filters-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Tablet portrait → single column */
+@media (max-width: 768px) {
+  .app-shell {
+    padding: 16px 16px 80px; /* bottom padding for FAB */
+  }
+
+  .topbar {
+    padding: 20px 18px;
+    border-radius: 10px;
+    gap: 10px;
+  }
+
+  .topbar h1 {
+    font-size: 1.5rem;
+  }
+
+  .topbar-user {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .card {
+    grid-column: 1 / -1;
+    padding: 20px 16px;
+  }
+
+  .add-card {
+    grid-column: 1 / -1;
+    border-radius: 16px;
+  }
+
+  .full-width {
+    grid-column: 1 / -1;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .stats div {
+    padding: 16px 12px;
+  }
+
+  .stats strong {
+    font-size: 1.6rem;
+  }
+
+  .stats span {
+    font-size: 0.75rem;
+  }
+
+  .filters-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .actions {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .question-card {
+    padding: 16px;
+  }
+
+  .question-header a {
+    max-width: 100%;
+    font-size: 0.95rem;
+  }
+
+  .empty-state {
+    padding: 60px 16px 60px;
+  }
+
+  .empty-state-character {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 28px;
+  }
+
+  .fab-button {
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+  }
+
+  input,
+  select {
+    padding: 12px 14px;
+    font-size: 16px; /* prevents iOS zoom on focus */
+  }
+
+  .btn {
+    padding: 12px 18px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile → full single column, stack everything */
+@media (max-width: 480px) {
+  .app-shell {
+    padding: 12px 12px 80px;
+  }
+
+  .topbar {
+    padding: 16px 14px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr; /* stack stats vertically on very small screens */
+  }
+
+  .stats div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+  }
+
+  .stats span {
+    margin-bottom: 0;
+  }
+
+  .stats strong {
+    font-size: 1.5rem;
+  }
+
+  .filters-row {
+    grid-template-columns: 1fr; /* one filter per row */
+  }
+
+  .actions {
+    grid-template-columns: 1fr; /* stack all action buttons */
+  }
+
+  .question-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .question-header a {
+    max-width: 100%;
+  }
+
+  .pill {
+    align-self: flex-start;
+  }
+
+  .card h2 {
+    font-size: 1.1rem;
+  }
+
+  .empty-state-character {
+    width: 130px;
+    height: 130px;
+  }
+
+  .fab-button {
+    bottom: 16px;
+    right: 16px;
+    width: 52px;
+    height: 52px;
+    font-size: 22px;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* ===== DARK MODE ===== */
+
 html.dark-mode {
   color-scheme: dark;
   --bg: #121212;
@@ -595,17 +758,9 @@ html.dark-mode .question-card {
   border-color: rgba(167, 139, 250, 0.15);
 }
 
-html.dark-mode .question-card:hover {
-  /* hover effect removed */
-}
-
 html.dark-mode .stats div {
   background: rgba(30, 30, 60, 0.3);
   border-color: rgba(167, 139, 250, 0.15);
-}
-
-html.dark-mode .stats div:hover {
-  /* hover effect removed */
 }
 
 html.dark-mode .pill {
@@ -639,10 +794,6 @@ html.dark-mode .empty-state h3 {
 html.dark-mode .add-card {
   background: rgba(30, 30, 60, 0.35);
   border-color: rgba(167, 139, 250, 0.15);
-}
-
-html.dark-mode .add-card:hover {
-  /* hover effect removed */
 }
 
 html.dark-mode .btn:hover {
